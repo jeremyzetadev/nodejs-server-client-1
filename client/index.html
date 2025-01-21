@@ -8,13 +8,16 @@
 <body>
     <form action="#" method="GET" id="formReg">
         <fieldset>
-            <legend>FormReg</legend>
-            <p>Register to add to database</p>
+            <legend>Form</legend>
+            <p>Form Enter here</p>
             <div class="formBox">
                 <input id="email" type="email" placeholder="email">
-                <input id="password" type="password" placeholder="password">
+                <input password="password" type="password" placeholder="password">
             </div>
-            <!--- server response -->
+            <div class="formBox">
+                <button id="btnReg">Register</button>
+            </div>
+            <!---- server response -->           
             <pre class="response">
 
             </pre>
@@ -23,48 +26,135 @@
 
     <form action="#" method="GET" id="formLogin">
         <fieldset>
-            <legend>formLogin</legend>
-            <p>Login to have API store</p>
+            <legend>Login Form</legend>
+            <p>Login Enter here</p>
             <div class="formBox">
                 <input id="email" type="email" placeholder="email">
-                <input id="password" type="password" placeholder="password">
+                <input password="password" type="password" placeholder="email">
             </div>
-            <!---server response-->
+            <div class="formBox">
+                <button id="btnLogin">Login</button>
+            </div>
+            <!---- server response -->           
             <pre class="response">
 
             </pre>
         </fieldset>
     </form>
 
-    <form action="#" method="GET" id="formGetAll">
+    <form action="#" method="GET" id="formGetCheese">
         <fieldset>
-            <legend>FormGetAll</legend>
-            <p>Get All Cheese</p>
+            <legend>Form get Cheese</legend>
+            <p>Get Cheese</p>
             <div class="formBox">
-                <h1>Cheeses here are listed:</h1>
+                <input type="text" placeholder="cheese name">
             </div>
-            <!---server response-->
+            <div class="formBox">
+                <button id="btnGetCheese">Get Cheese</button>
+            </div>
+            <!---- server response -->           
             <pre class="response">
-                
+
             </pre>
         </fieldset>
     </form>
 
-    <form action="#" method="GET" id="formGet">
+    <form action="#" method="GET" id="formGetAllCheese">
         <fieldset>
-            <legend>formGet</legend>
-            <p>Get Some Cheese</p>
+            <legend>Form get All Cheeses</legend>
+            <p>Get Cheeses</p>
             <div class="formBox">
-                <h1>Cheese here are shown</h1>
+                <input type="text" placeholder="cheese name">
             </div>
-            <!---server response-->
-            <pre class="response">
-                
+            <div class="formBox">
+                <button id="btnGetAllCheese">Get All Cheese</button>
+            </div>
+            <!---- server response -->
+            <pre clas="response">
+
             </pre>
+        </fieldset>
+    </form>
+
+    <form action="#" method="POST" id="formAddCheese">
+        <fieldset>
+            <legend>Form Add Cheese</legend>
+            <p>Add a certain cheese</p>
+            <div class="formBox">
+                <input type="text" placeholder="Add Cheese">
+            </div>
+            <div class="formBox">
+                <button id="btnAddCheese">Add Cheese</button>
+            </div>
         </fieldset>
     </form>
 </body>
 <script>
-    
+    document.addEventListener("DOMContentLoaded",()=>{
+        document.getElementById("btnReg").addEventListener("click",doReg);
+        document.getElementById("btnLogin").addEventListener("click",doLogin);
+        document.getElementById("btnAddCheese").addEventListener("click",doAddCheese);
+        document.getElementById("btnGetCheese").addEventListener("click",doGetCheese);
+        document.getElementById("btnGetAllCheese").addEventListener("click",doGetAllCheese);
+    })
+
+    function doLogin(ev){
+
+    }
+
+    function doAddCheese(ev){
+
+    }
+
+    function doGetCheese(ev){
+
+    }
+
+    function doGetAllCheese(ev){
+        
+    }
+
+    let currentForm = null;
+
+    function doReg(ev){
+        ev.preventDefault();
+        currentForm = 'regForm';
+        let email = document.getElementById("email").value;
+        let data = JSON.stringify({email});
+        send('api/register',data,'POST');
+    }
+
+    function send(endpoint,data,method){
+        let key = sessionStorage.getItem('mySiteAPIKey');
+        let url = `http:localhost:4000/${endpoint}`;
+        let h = new Headers();
+        if(data){
+            h.append('Content-Type','application/json');
+        }
+        h.append('x-api-key',key);
+        let req = new Request(url,{
+            method,
+            headers: h,
+            body: data,
+        });
+        fetch(req)
+            .then((res)=>res.json())
+            .then(success)
+            .then(fail)
+    }
+
+    function success(){
+        let data =content.data;
+        let pre = document.querySelector(`#${currentForm} .response`);
+        pre.textContent = JSON.stringify(data, '\n' ,2);
+        if(currentForm='regFrom'){
+            sessionStorage.setItem('mySiteAPIKey',data.api_key);
+        }
+    }
+
+    function fail(err){
+
+    }
 </script>
+
 </html>
