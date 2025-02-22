@@ -118,7 +118,7 @@
 
     function doReg(ev){
         ev.preventDefault();
-        currentForm = 'regForm';
+        currentForm = 'formReg';
         let email = document.getElementById("email").value;
         let data = JSON.stringify({email});
         send('api/register',data,'POST');
@@ -147,7 +147,7 @@
         let data =content.data;
         let pre = document.querySelector(`#${currentForm} .response`);
         pre.textContent = JSON.stringify(data, '\n' ,2);
-        if(currentForm='regFrom'){
+        if(currentForm='formReg'){
             sessionStorage.setItem('mySiteAPIKey',data.api_key);
         }
     }
