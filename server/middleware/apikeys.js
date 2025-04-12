@@ -23,7 +23,7 @@ export const createUser = (_email,req)=>{
 
 export const validateKey = (req, res, next) =>{
     let host = req.headers.origin;
-    let api_key = req.headeres('x-api-key');
+    let api_key = req.headers('x-api-key');
     let account = users.find(
         (user) => user.host == host && user.api_key == api_key
     );

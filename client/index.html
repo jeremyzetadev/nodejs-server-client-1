@@ -139,11 +139,16 @@
         });
         fetch(req)
             .then((res)=>res.json())
-            .then(success)
-            .then(fail)
+            .then(success) // resp json will be get here
+            .then(fail) 
     }
 
-    function success(){
+    function success(content){
+        if('error' in content){
+            fail(content.error);
+            return;
+        }
+
         let data =content.data;
         let pre = document.querySelector(`#${currentForm} .response`);
         pre.textContent = JSON.stringify(data, '\n' ,2);
@@ -153,7 +158,9 @@
     }
 
     function fail(err){
-
+        console.warn(err.message);
+        let pre = document.querySelector(`#${currentForm} .response`);
+        pre.textContent = err.message;
     }
 </script>
 
