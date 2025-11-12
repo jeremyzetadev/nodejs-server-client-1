@@ -1,9 +1,5 @@
 # Setup for APIKeys Server-Client
-
 ![image](https://github.com/user-attachments/assets/e84e9195-8fa5-4e95-9b1c-9c97070c6dde)
-
-# Example Backend Architecture / System Flow
-![image](https://github.com/user-attachments/assets/ea841d79-3501-48b2-91f6-21602d40e2d7)
 
 # Manipulate data by CRUD (ex: List of employee)
 <img width="1041" height="597" alt="image" src="https://github.com/user-attachments/assets/0df6af36-ec93-4d3e-887d-fb7a3a844e11" />
